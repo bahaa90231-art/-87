@@ -1,535 +1,394 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>أكاديمية راما التعليمية | رحلة التركية الذكية</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- AOS Scroll Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التسجيل في جلسات أساسيات البرمجة - النظام التقني الذكي للمبرمج بهاء الدين الحسين</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh; padding: 15px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .container {
+    width: 100%; max-width: 550px; background: #fff;
+    border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); overflow: hidden;
+  }
+  header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff; padding: 25px 20px; text-align: center;
+  }
+  header h1 { font-size: 1.4rem; margin-bottom: 6px; }
+  header p { opacity: 0.9; font-size: 0.95rem; }
+  form { padding: 25px 20px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; margin-bottom: 6px; color: #333;
+    font-weight: 600; font-size: 0.95rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 12px 14px; border: 2px solid #e0e7ff;
+    border-radius: 8px; font-size: 1rem; transition: all 0.3s; background: #f8faff;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none; border-color: #2a5298; background: #fff;
+    box-shadow: 0 0 0 3px rgba(42,82,152,0.1);
+  }
+  .radio-group {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .radio-group label {
+    display: flex; align-items: center; gap: 6px;
+    font-weight: 500; cursor: pointer;
+    padding: 10px 16px; border: 2px solid #e0e7ff;
+    border-radius: 8px; background: #f8faff;
+    transition: all 0.2s; margin: 0;
+  }
+  .radio-group label:hover { border-color: #2a5298; }
+  .radio-group input[type="radio"] {
+    width: auto; accent-color: #2a5298; cursor: pointer;
+  }
+  .radio-group label:has(input:checked) {
+    border-color: #2a5298; background: #eef2ff;
+    color: #2a5298; font-weight: 600;
+  }
+  .btn-submit {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff; border: none; border-radius: 8px;
+    font-size: 1.05rem; font-weight: bold; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; margin-top: 8px;
+  }
+  .btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(42,82,152,0.4);
+  }
+  .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+  .toast {
+    position: fixed; bottom: 25px; left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #10b981; color: #fff; padding: 14px 25px;
+    border-radius: 8px; font-weight: bold; opacity: 0;
+    transition: all 0.4s; z-index: 1000; font-size: 0.95rem;
+    max-width: 90%; text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.error { background: #ef4444; }
 
-        body {
-            background: #0a0c10;
-            font-family: 'Cairo', 'Inter', sans-serif;
-            color: #eef2ff;
-            line-height: 1.5;
-            overflow-x: hidden;
-        }
+  /* ============================================ */
+  /* نافذة النجاح مع زر الواتساب */
+  /* ============================================ */
+  .success-modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s;
+    padding: 20px;
+  }
+  .success-modal.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  .success-content {
+    background: #fff;
+    border-radius: 20px;
+    padding: 35px 25px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    transform: scale(0.7);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .success-modal.show .success-content {
+    transform: scale(1);
+  }
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2.5rem;
+    color: #fff;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+  }
+  .success-content h2 {
+    color: #2a5298;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .success-content p {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .success-content .note {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 20px;
+  }
+  .btn-whatsapp {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+  }
+  .btn-close {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: #888;
+    border: 2px solid #e0e7ff;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-close:hover {
+    background: #f8faff;
+    color: #2a5298;
+    border-color: #2a5298;
+  }
 
-        /* Animated Gradient Background - خارق 🔥 */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 20% 30%, #0f172a, #020617);
-        }
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle, rgba(255, 80, 40, 0.2) 0%, rgba(0, 200, 255, 0.05) 100%);
-            animation: rotateGlow 28s infinite linear;
-        }
-        @keyframes rotateGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Glassmorphism + Neon */
-        .glass-card {
-            background: rgba(15, 25, 45, 0.7);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 100, 50, 0.35);
-            border-radius: 48px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 15px rgba(255, 80, 40, 0.2);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            border-color: #ff4d2e;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 30px rgba(255, 70, 30, 0.4);
-            transform: translateY(-5px);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 5rem 0 6rem;
-            text-align: center;
-            position: relative;
-        }
-        .hero h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #FFFFFF, #FF8C5A, #FF3B1F);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(255, 60, 30, 0.3);
-            letter-spacing: -1px;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255, 70, 40, 0.2);
-            border: 1px solid #ff4d2e;
-            border-radius: 60px;
-            padding: 0.5rem 1.8rem;
-            margin-top: 1.5rem;
-            font-weight: 600;
-            backdrop-filter: blur(5px);
-        }
-
-        .section-title {
-            font-size: 2.6rem;
-            font-weight: 800;
-            margin: 3rem 0 2rem;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title span {
-            background: linear-gradient(120deg, #ff6a42, #ff2e00);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        .section-title i {
-            color: #ff5e3a;
-            margin-left: 15px;
-        }
-
-        /* Alphabet Grid */
-        .alphabet-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
-            gap: 18px;
-            padding: 1rem;
-        }
-        .letter-neon {
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 90, 50, 0.5);
-            border-radius: 28px;
-            text-align: center;
-            padding: 1rem 0.5rem;
-            font-size: 2.2rem;
-            font-weight: 800;
-            font-family: 'Inter', monospace;
-            transition: all 0.2s;
-            color: #fff0e0;
-        }
-        .letter-neon:hover {
-            background: #ff3b1f20;
-            border-color: #ff704d;
-            transform: scale(1.03);
-            text-shadow: 0 0 8px #ff6333;
-        }
-
-        /* Numbers styling - كتابة تركية + الرقم */
-        .numbers-mega-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-        .digit-card {
-            background: radial-gradient(ellipse at 30% 20%, #1e293b, #0f172a);
-            border-radius: 32px;
-            padding: 18px 24px;
-            min-width: 120px;
-            text-align: center;
-            border-bottom: 3px solid #ff512e;
-            transition: 0.2s;
-            box-shadow: 0 10px 20px -5px black;
-        }
-        .digit-card .digit-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            font-family: monospace;
-            color: #ffccaa;
-            letter-spacing: 2px;
-        }
-        .digit-card .digit-turkish {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #ffb085;
-            margin-top: 8px;
-            border-top: 1px dashed #ff6a3a;
-            padding-top: 6px;
-        }
-
-        .tens-group, .hundreds-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-        .num-badge-premium {
-            background: #111827cc;
-            backdrop-filter: blur(5px);
-            border-radius: 60px;
-            padding: 12px 26px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            display: flex;
-            gap: 14px;
-            align-items: baseline;
-            border: 1px solid #ff6a3a;
-            transition: 0.15s;
-        }
-        .num-badge-premium .value {
-            font-family: monospace;
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: #ffbc8c;
-        }
-        .num-badge-premium .tr-text {
-            font-size: 1.2rem;
-            color: #ffdbbc;
-            font-weight: 500;
-        }
-        .num-badge-premium:hover {
-            background: #ff4d2e30;
-            transform: scale(1.02);
-        }
-
-        /* Vocabulary Grid 100 words */
-        .vocab-neon-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 14px;
-            max-height: 600px;
-            overflow-y: auto;
-            padding: 0.5rem;
-        }
-        .vocab-word-item {
-            background: rgba(0, 0, 0, 0.45);
-            border-radius: 28px;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-right: 4px solid #ff5e2e;
-            backdrop-filter: blur(4px);
-        }
-        .vocab-word-item:hover {
-            background: #ff3b1f20;
-            border-right-color: #ffaa77;
-        }
-        .vocab-tr {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: #ffccaa;
-        }
-        .vocab-ar {
-            background: #00000055;
-            padding: 4px 14px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-        }
-
-        footer {
-            background: #020617aa;
-            backdrop-filter: blur(20px);
-            border-top: 1px solid #ff4d2e;
-            margin-top: 5rem;
-            padding: 2.5rem;
-            text-align: center;
-        }
-
-        /* Modern Welcome Modal (بديل رسالة المتصفح) */
-        .welcome-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: visible;
-            opacity: 1;
-            transition: all 0.3s ease;
-        }
-        .welcome-modal.hide {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .modal-content {
-            background: linear-gradient(145deg, #111c2e, #07111f);
-            border: 1px solid #ff5e3a;
-            border-radius: 60px;
-            max-width: 500px;
-            width: 85%;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            box-shadow: 0 0 70px rgba(255, 60, 30, 0.4);
-            animation: floatPop 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-        @keyframes floatPop {
-            0% { transform: scale(0.9) translateY(30px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
-        .modal-content i {
-            font-size: 4rem;
-            color: #ff6a42;
-            margin-bottom: 1rem;
-        }
-        .modal-content h2 {
-            font-size: 2rem;
-            margin: 0.5rem 0;
-        }
-        .modal-content p {
-            font-size: 1.1rem;
-            margin: 1rem 0;
-            line-height: 1.6;
-        }
-        .close-modal-btn {
-            background: #ff4d2e;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-weight: bold;
-            font-size: 1rem;
-            margin-top: 1rem;
-            cursor: pointer;
-            color: white;
-            transition: 0.2s;
-        }
-        .close-modal-btn:hover {
-            background: #ff2a0a;
-            transform: scale(1.02);
-            box-shadow: 0 0 12px #ff4d2e;
-        }
-        @media (max-width: 760px) {
-            .container { padding: 0 1rem; }
-            .hero h1 { font-size: 2.6rem; }
-            .digit-card { padding: 12px 16px; min-width: 90px; }
-            .digit-number { font-size: 1.8rem; }
-            .num-badge-premium { padding: 8px 18px; }
-            .section-title { font-size: 1.8rem; }
-        }
-    </style>
+  @media (max-width: 480px) {
+    header { padding: 20px 15px; }
+    header h1 { font-size: 1.1rem; }
+    header p { font-size: 0.82rem; }
+    form { padding: 20px 15px; }
+    .form-group label { font-size: 0.9rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 11px 12px; font-size: 0.95rem;
+    }
+    .btn-submit { font-size: 1rem; padding: 13px; }
+    .radio-group { gap: 8px; }
+    .radio-group label { padding: 8px 12px; font-size: 0.88rem; }
+    .success-content { padding: 25px 20px; }
+    .success-icon { width: 70px; height: 70px; font-size: 2rem; }
+    .success-content h2 { font-size: 1.25rem; }
+    .success-content p { font-size: 0.92rem; }
+    .btn-whatsapp { font-size: 0.98rem; padding: 13px; }
+  }
+</style>
 </head>
 <body>
-
-<div class="bg-animation"></div>
-
-<!-- Modern Welcome Popup (بديل رسالة المتصفح) -->
-<div id="welcomeModal" class="welcome-modal">
-    <div class="modal-content">
-        <i class="fas fa-crown"></i>
-        <h2>✨ مرحباً في أكاديمية راما ✨</h2>
-        <p>🚀 <strong>رحلة التعلم الذكية تبدأ الآن!</strong> 🚀<br>
-        📖 اكتشف حروف التركية، أرقامها، وأكثر من 100 كلمة يومية.<br>
-        🔥 تجربة غامرة، تصميم خارق، ومحتوى احترافي بانتظارك.<br>
-        🌟 استعد لتتحدث التركية بثقة!</p>
-        <button class="close-modal-btn" id="closeModalBtn"><i class="fas fa-rocket"></i> لنبدأ الرحلة 🔥</button>
-    </div>
-</div>
-
 <div class="container">
-    <!-- Hero -->
-    <div class="hero" data-aos="fade-down">
-        <h1>أكاديمية راما التعليمية</h1>
-        <div style="font-size: 3.5rem; margin: 0.5rem 0;">🇹🇷⚡</div>
-        <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto;">إتقان اللغة التركية بثورة تعليمية — من الحروف إلى الإحتراف</p>
-        <div class="hero-badge"><i class="fas fa-fire"></i> تعلم بذكاء لا محدود | نظام عصري شامل</div>
+  <header>
+    <h1>🎓 النظام التقني الذكي</h1>
+    <p>للمبرمج بهاء الدين الحسين</p>
+    <p style="margin-top:6px; font-size:0.85rem; opacity:0.85;">التسجيل في جلسات أساسيات البرمجة</p>
+  </header>
+
+  <form id="registrationForm">
+    <div class="form-group">
+      <label for="fullName">الاسم الكامل *</label>
+      <input type="text" id="fullName" required placeholder="اكتب اسمك الكامل">
     </div>
 
-    <!-- Alphabet -->
-    <div data-aos="fade-up">
-        <div class="section-title"><i class="fas fa-gem"></i> <span>أحرف اللغة التركية</span></div>
-        <div class="glass-card" style="padding: 1.2rem;">
-            <div class="alphabet-grid" id="alphaGrid"></div>
-            <div style="text-align: center; margin-top: 18px;"><i class="fas fa-star-of-life"></i> 29 حرفاً بإضاءة عصرية</div>
-        </div>
+    <div class="form-group">
+      <label>الجنس *</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="gender" value="ذكر" required>
+          👨 ذكر
+        </label>
+        <label>
+          <input type="radio" name="gender" value="أنثى" required>
+          👩 أنثى
+        </label>
+      </div>
     </div>
 
-    <!-- Numbers Section : كتابة تركية + الرقم -->
-    <div data-aos="fade-up" data-aos-delay="100">
-        <div class="section-title"><i class="fas fa-hashtag"></i> <span>الأرقام التركية</span> <span style="font-size:1rem;">(كتابةً ورقماً)</span></div>
-        <div class="glass-card" style="padding: 1.8rem;">
-            <h3 style="margin-bottom: 20px; color:#ffb085;"><i class="fas fa-arrow-left"></i> 1 - 10 (عدد + كتابة تركية)</h3>
-            <div class="numbers-mega-grid" id="numbers1to10Combined"></div>
-            
-            <h3 style="margin: 35px 0 20px; color:#ffb085;"><i class="fas fa-chart-line"></i> العشرات (10 → 100)</h3>
-            <div class="tens-group" id="tensCombined"></div>
-            
-            <h3 style="margin: 35px 0 20px; color:#ffb085;"><i class="fas fa-chart-simple"></i> المئات (100 → 1000)</h3>
-            <div class="hundreds-group" id="hundredsCombined"></div>
-        </div>
+    <div class="form-group">
+      <label for="email">البريد الإلكتروني (اختياري)</label>
+      <input type="email" id="email" placeholder="example@email.com">
     </div>
 
-    <!-- 100 Essential Words -->
-    <div data-aos="fade-up" data-aos-delay="200">
-        <div class="section-title"><i class="fas fa-comments"></i> <span>100 كلمة أساسية</span> <span style="font-size:1rem;">محادثة يومية</span></div>
-        <div class="glass-card" style="padding: 1.5rem;">
-            <div class="vocab-neon-grid" id="vocabEssential100"></div>
-            <div style="margin-top: 20px; text-align: center;"><i class="fas fa-check-circle"></i> كلمات مختارة من قلب الحياة اليومية — كن fluent بسرعة</div>
-        </div>
+    <div class="form-group">
+      <label for="phone">رقم الهاتف *</label>
+      <input type="tel" id="phone" required placeholder="07xxxxxxxx">
     </div>
+
+    <div class="form-group">
+      <label for="age">العمر *</label>
+      <input type="number" id="age" min="10" max="80" required placeholder="18">
+    </div>
+
+    <div class="form-group">
+      <label for="city">المدينة *</label>
+      <input type="text" id="city" required placeholder="مثال: دمشق">
+    </div>
+
+    <div class="form-group">
+      <label for="education">الشهادة التعليمية (اختياري)</label>
+      <select id="education">
+        <option value="">-- اختر الشهادة --</option>
+        <option value="ابتدائي">ابتدائي</option>
+        <option value="إعدادي">إعدادي</option>
+        <option value="ثانوي">ثانوي</option>
+        <option value="معهد">معهد</option>
+        <option value="جامعة">جامعة</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>هل لديك خبرة سابقة في البرمجة؟ *</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="experience" value="نعم" required>
+          ✅ نعم
+        </label>
+        <label>
+          <input type="radio" name="experience" value="لا" required>
+          ❌ لا
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>الجلسات المطلوبة *</label>
+      <input type="text" value="جلسات أساسيات البرمجة - النظام التقني الذكي للمبرمج بهاء الدين الحسين" disabled
+             style="background:#eef2ff; font-weight:600; color:#2a5298;">
+      <input type="hidden" id="course" value="جلسات أساسيات البرمجة - النظام التقني الذكي للمبرمج بهاء الدين الحسين">
+    </div>
+
+    <button type="submit" class="btn-submit">✅ تأكيد التسجيل</button>
+  </form>
 </div>
 
-<footer>
-    <p><i class="fas fa-crown"></i> أكاديمية راما التعليمية — تجربة تعلم فائقة الحداثة</p>
-    <p>© 2025 | إتقان التركية بأسلوب ثوري ذكي</p>
-</footer>
+<div id="toast" class="toast"></div>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- ============================================ -->
+<!-- نافذة النجاح مع زر الواتساب -->
+<!-- ============================================ -->
+<div id="successModal" class="success-modal">
+  <div class="success-content">
+    <div class="success-icon">✅</div>
+    <h2>تم تسجيلك بنجاح!</h2>
+    <p>سيتم تحويلك تلقائياً إلى مجموعة الواتساب خلال لحظات...</p>
+    <p class="note">إذا لم يتم التحويل تلقائياً، اضغط الزر أدناه:</p>
+    <button class="btn-whatsapp" onclick="goToWhatsapp()">
+      💬 الانضمام إلى مجموعة الواتساب
+    </button>
+    <button class="btn-close" onclick="closeModal()">إغلاق</button>
+  </div>
+</div>
+
 <script>
-    AOS.init({ duration: 800, once: true, offset: 60 });
-    
-    // ---------- 1. الحروف ----------
-    const turkishLetters = ["A","B","C","Ç","D","E","F","G","Ğ","H","I","İ","J","K","L","M","N","O","Ö","P","R","S","Ş","T","U","Ü","V","Y","Z"];
-    const alphaGrid = document.getElementById("alphaGrid");
-    turkishLetters.forEach(letter => {
-        const div = document.createElement("div");
-        div.className = "letter-neon";
-        div.textContent = letter;
-        alphaGrid.appendChild(div);
+  // ============================================
+  // رابط Google Apps Script الخاص بك
+  // ============================================
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwj2aPsOSYygXRbf-VIkeUuyg5hb8NRoQY-X7p0JwazYPOZX0FKZvrazBsRBK1NIMtAqQ/exec';
+
+  // ============================================
+  // رابط مجموعة الواتساب
+  // ============================================
+  const WHATSAPP_URL = 'https://chat.whatsapp.com/KzEZrjKeen2GBgAqkUIanG';
+
+  document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const submitBtn = this.querySelector('.btn-submit');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ جاري الإرسال...';
+
+    const genderInput = document.querySelector('input[name="gender"]:checked');
+    const experienceInput = document.querySelector('input[name="experience"]:checked');
+
+    const formData = new URLSearchParams();
+    formData.append('fullName', document.getElementById('fullName').value.trim());
+    formData.append('gender', genderInput ? genderInput.value : '');
+    formData.append('email', document.getElementById('email').value.trim());
+    formData.append('phone', document.getElementById('phone').value.trim());
+    formData.append('age', document.getElementById('age').value);
+    formData.append('city', document.getElementById('city').value.trim());
+    formData.append('education', document.getElementById('education').value);
+    formData.append('experience', experienceInput ? experienceInput.value : '');
+    formData.append('course', document.getElementById('course').value);
+    formData.append('date', new Date().toLocaleString('ar-EG'));
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
+    .then(() => {
+      document.getElementById('registrationForm').reset();
+      showSuccessModal();
+    })
+    .catch(error => {
+      console.error(error);
+      showToast('❌ حدث خطأ، تحقق من الاتصال', true);
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
     });
-    
-    // ---------- 2. الأرقام: كتابة تركية + الرقم معاً ----------
-    // 1-10
-    const numbers1to10 = [
-        { num: "1", tr: "bir" }, { num: "2", tr: "iki" }, { num: "3", tr: "üç" },
-        { num: "4", tr: "dört" }, { num: "5", tr: "beş" }, { num: "6", tr: "altı" },
-        { num: "7", tr: "yedi" }, { num: "8", tr: "sekiz" }, { num: "9", tr: "dokuz" },
-        { num: "10", tr: "on" }
-    ];
-    const container1_10 = document.getElementById("numbers1to10Combined");
-    numbers1to10.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "digit-card";
-        card.innerHTML = `<div class="digit-number">${item.num}</div><div class="digit-turkish">${item.tr}</div>`;
-        container1_10.appendChild(card);
-    });
-    
-    // العشرات مع كتابة تركية + الرقم
-    const tensData = [
-        { num: "10", tr: "on" }, { num: "20", tr: "yirmi" }, { num: "30", tr: "otuz" },
-        { num: "40", tr: "kırk" }, { num: "50", tr: "elli" }, { num: "60", tr: "altmış" },
-        { num: "70", tr: "yetmiş" }, { num: "80", tr: "seksen" }, { num: "90", tr: "doksan" },
-        { num: "100", tr: "yüz" }
-    ];
-    const tensContainer = document.getElementById("tensCombined");
-    tensData.forEach(t => {
-        const badge = document.createElement("div");
-        badge.className = "num-badge-premium";
-        badge.innerHTML = `<span class="value">${t.num}</span> <span class="tr-text">${t.tr}</span>`;
-        tensContainer.appendChild(badge);
-    });
-    
-    // المئات مع كتابة تركية + الرقم (100-1000)
-    const hundredsData = [
-        { num: "100", tr: "yüz" }, { num: "200", tr: "iki yüz" }, { num: "300", tr: "üç yüz" },
-        { num: "400", tr: "dört yüz" }, { num: "500", tr: "beş yüz" }, { num: "600", tr: "altı yüz" },
-        { num: "700", tr: "yedi yüz" }, { num: "800", tr: "sekiz yüz" }, { num: "900", tr: "dokuz yüz" },
-        { num: "1000", tr: "bin" }
-    ];
-    const hundredsContainer = document.getElementById("hundredsCombined");
-    hundredsData.forEach(h => {
-        const badge = document.createElement("div");
-        badge.className = "num-badge-premium";
-        badge.innerHTML = `<span class="value">${h.num}</span> <span class="tr-text">${h.tr}</span>`;
-        hundredsContainer.appendChild(badge);
-    });
-    
-    // ---------- 3. قائمة 100 كلمة أساسية ----------
-    const vocabWords = [
-        {tr: "Merhaba", ar: "مرحباً"}, {tr: "Günaydın", ar: "صباح الخير"}, {tr: "İyi akşamlar", ar: "مساء الخير"}, {tr: "Hoşça kal", ar: "وداعاً"}, 
-        {tr: "Teşekkürler", ar: "شكراً"}, {tr: "Rica ederim", ar: "عفواً"}, {tr: "Evet", ar: "نعم"}, {tr: "Hayır", ar: "لا"}, 
-        {tr: "Lütfen", ar: "من فضلك"}, {tr: "Özür dilerim", ar: "أنا آسف"}, {tr: "Nasılsın?", ar: "كيف حالك؟"}, {tr: "İyiyim", ar: "بخير"},
-        {tr: "Adın ne?", ar: "ما اسمك؟"}, {tr: "Ben...", ar: "أنا..."}, {tr: "Nereden geliyorsun?", ar: "من أين أنت؟"}, {tr: "Anlıyorum", ar: "أفهم"},
-        {tr: "Anlamadım", ar: "لم أفهم"}, {tr: "Yavaş konuş", ar: "تحدث ببطء"}, {tr: "Su", ar: "ماء"}, {tr: "Ekmek", ar: "خبز"},
-        {tr: "Çay", ar: "شاي"}, {tr: "Kahve", ar: "قهوة"}, {tr: "Yemek", ar: "طعام"}, {tr: "Okul", ar: "مدرسة"}, 
-        {tr: "Öğretmen", ar: "معلم"}, {tr: "Öğrenci", ar: "طالب"}, {tr: "Kitap", ar: "كتاب"}, {tr: "Kalem", ar: "قلم"},
-        {tr: "Defter", ar: "دفتر"}, {tr: "Ev", ar: "منزل"}, {tr: "Araba", ar: "سيارة"}, {tr: "İş", ar: "عمل"},
-        {tr: "Doktor", ar: "طبيب"}, {tr: "Hastane", ar: "مستشفى"}, {tr: "Aile", ar: "عائلة"}, {tr: "Anne", ar: "أم"},
-        {tr: "Baba", ar: "أب"}, {tr: "Kardeş", ar: "أخ/أخت"}, {tr: "Arkadaş", ar: "صديق"}, {tr: "Güzel", ar: "جميل"},
-        {tr: "Mutlu", ar: "سعيد"}, {tr: "Üzgün", ar: "حزين"}, {tr: "Büyük", ar: "كبير"}, {tr: "Küçük", ar: "صغير"},
-        {tr: "Sıcak", ar: "حار"}, {tr: "Soğuk", ar: "بارد"}, {tr: "Yeni", ar: "جديد"}, {tr: "Eski", ar: "قديم"},
-        {tr: "Hızlı", ar: "سريع"}, {tr: "Yavaş", ar: "بطيء"}, {tr: "Bugün", ar: "اليوم"}, {tr: "Yarın", ar: "غداً"},
-        {tr: "Dün", ar: "أمس"}, {tr: "Sabah", ar: "صباح"}, {tr: "Akşam", ar: "مساء"}, {tr: "Gece", ar: "ليل"},
-        {tr: "Hafta", ar: "أسبوع"}, {tr: "Ay", ar: "شهر"}, {tr: "Yıl", ar: "سنة"}, {tr: "Gitmek", ar: "يذهب"},
-        {tr: "Gelmek", ar: "يأتي"}, {tr: "Yapmak", ar: "يفعل"}, {tr: "Görmek", ar: "يرى"}, {tr: "Konuşmak", ar: "يتكلم"},
-        {tr: "Dinlemek", ar: "يستمع"}, {tr: "Yazmak", ar: "يكتب"}, {tr: "Okumak", ar: "يقرأ"}, {tr: "Sevmek", ar: "يحب"},
-        {tr: "İstemek", ar: "يريد"}, {tr: "Bilmek", ar: "يعرف"}, {tr: "Düşünmek", ar: "يفكر"}, {tr: "Çalışmak", ar: "يعمل"},
-        {tr: "Oynamak", ar: "يلعب"}, {tr: "Uyumak", ar: "ينام"}, {tr: "Kalkmak", ar: "يقوم"}, {tr: "Almak", ar: "يأخذ"},
-        {tr: "Vermek", ar: "يعطي"}, {tr: "Açmak", ar: "يفتح"}, {tr: "Kapatmak", ar: "يغلق"}, {tr: "Telefon", ar: "هاتف"},
-        {tr: "Bilgisayar", ar: "حاسوب"}, {tr: "İnternet", ar: "إنترنت"}, {tr: "Hava", ar: "طقس"}, {tr: "Yağmur", ar: "مطر"},
-        {tr: "Kar", ar: "ثلج"}, {tr: "Güneş", ar: "شمس"}, {tr: "Deniz", ar: "بحر"}, {tr: "Dağ", ar: "جبل"},
-        {tr: "Şehir", ar: "مدينة"}, {tr: "Ülke", ar: "دولة"}, {tr: "Dil", ar: "لغة"}, {tr: "Türkçe", ar: "التركية"},
-        {tr: "Arapça", ar: "العربية"}, {tr: "İngilizce", ar: "الإنجليزية"}, {tr: "Neden", ar: "لماذا"}, {tr: "Nasıl", ar: "كيف"},
-        {tr: "Ne zaman", ar: "متى"}, {tr: "Nerede", ar: "أين"}, {tr: "Kaç", ar: "كم"}, {tr: "Çok", ar: "جداً"},
-        {tr: "Biraz", ar: "قليلاً"}, {tr: "Her zaman", ar: "دائماً"}, {tr: "Asla", ar: "أبداً"}, {tr: "Afiyet olsun", ar: "بالهناء"}, 
-        {tr: "Geçmiş olsun", ar: "معافاة"}, {tr: "Kolay gelsin", ar: "بالتوفيق"}, {tr: "Görüşürüz", ar: "نراكم لاحقاً"}
-    ];
-    let finalVocab = vocabWords.slice(0, 100);
-    if(finalVocab.length < 100) {
-        const extra = [{tr: "Harika", ar:"رائع"},{tr:"Süper", ar:"سوبر"},{tr:"Mükemmel", ar:"ممتاز"}];
-        while(finalVocab.length < 100) finalVocab.push(extra[finalVocab.length % extra.length]);
-    }
-    const vocabContainer = document.getElementById("vocabEssential100");
-    finalVocab.forEach(word => {
-        const div = document.createElement("div");
-        div.className = "vocab-word-item";
-        div.innerHTML = `<span class="vocab-tr">${word.tr}</span><span class="vocab-ar">${word.ar}</span>`;
-        vocabContainer.appendChild(div);
-    });
-    
-    // ---------- MODERN WELCOME MODAL (حديثة جداً) ----------
-    const modal = document.getElementById("welcomeModal");
-    const closeBtn = document.getElementById("closeModalBtn");
-    function closeModal() {
-        modal.classList.add("hide");
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 400);
-    }
-    closeBtn.addEventListener("click", closeModal);
-    // إغلاق عند الضغط خارج المحتوى (اختياري)
-    modal.addEventListener("click", (e) => {
-        if(e.target === modal) closeModal();
-    });
-    // منع ظهور scroll background
-    document.body.style.overflow = "hidden";
-    modal.addEventListener("transitionend", () => {
-        if(modal.classList.contains("hide")) document.body.style.overflow = "auto";
-    });
-    // بديل آمن
-    window.addEventListener("load", () => {
-        // تأكد من أن المودال يظهر بشكل سلس
-        setTimeout(() => {
-            document.body.style.overflow = "hidden";
-        }, 10);
-    });
+  });
+
+  // ============================================
+  // عرض نافذة النجاح مع التحويل التلقائي للواتساب
+  // ============================================
+  function showSuccessModal() {
+    const modal = document.getElementById('successModal');
+    modal.classList.add('show');
+
+    // التحويل التلقائي للواتساب بعد ثانيتين
+    setTimeout(() => {
+      window.open(WHATSAPP_URL, '_blank');
+    }, 2000);
+  }
+
+  function closeModal() {
+    document.getElementById('successModal').classList.remove('show');
+  }
+
+  function goToWhatsapp() {
+    window.open(WHATSAPP_URL, '_blank');
+  }
+
+  function showToast(msg, isError = false) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast show' + (isError ? ' error' : '');
+    setTimeout(() => toast.className = 'toast', 3000);
+  }
 </script>
 </body>
 </html>
