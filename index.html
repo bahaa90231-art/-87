@@ -10,11 +10,198 @@
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh; padding: 15px;
     display: flex; align-items: center; justify-content: center;
+    overflow-x: hidden;
   }
+
+  /* ============================================ */
+  /* شاشة الترحيب */
+  /* ============================================ */
+  .splash-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    padding: 20px;
+  }
+  .splash-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* الشعار الدائري مع الخطوط الملونة */
+  .logo-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  /* الحلقة الخارجية الدوّارة */
+  .rotating-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: #00d4ff;
+    border-right-color: #ff006e;
+    border-bottom-color: #ffbe0b;
+    border-left-color: #06ffa5;
+    animation: spin 2s linear infinite;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  }
+
+  /* الحلقة الثانية الدوّارة بالعكس */
+  .rotating-ring-2 {
+    position: absolute;
+    width: 130%;
+    height: 130%;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #ff006e;
+    border-right-color: #06ffa5;
+    border-bottom-color: #00d4ff;
+    border-left-color: #ffbe0b;
+    animation: spin-reverse 3s linear infinite;
+    opacity: 0.7;
+  }
+
+  /* الحلقة الثالثة */
+  .rotating-ring-3 {
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    animation: spin 4s linear infinite;
+  }
+
+  /* الشعار الدائري الصغير في المنتصف */
+  .logo-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffffff, #e0e7ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6),
+                inset 0 0 20px rgba(42, 82, 152, 0.2);
+    z-index: 2;
+    animation: pulse-logo 2s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  @keyframes pulse-logo {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  /* اسم النظام */
+  .splash-title {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease 0.3s both;
+  }
+
+  .splash-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 25px;
+    animation: fadeInUp 1s ease 0.5s both;
+  }
+
+  /* رسالة الترحيب */
+  .splash-message {
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 400px;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease 0.7s both;
+  }
+
+  /* شريط التحميل */
+  .loading-bar {
+    margin-top: 30px;
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeInUp 1s ease 0.9s both;
+  }
+  .loading-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00d4ff, #06ffa5, #ffbe0b, #ff006e);
+    background-size: 200% 100%;
+    border-radius: 4px;
+    animation: loadingProgress 3s ease forwards, shimmer 2s linear infinite;
+  }
+
+  @keyframes loadingProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+  @keyframes shimmer {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ============================================ */
+  /* الحاوية الرئيسية (تظهر بعد الترحيب) */
+  /* ============================================ */
   .container {
     width: 100%; max-width: 550px; background: #fff;
     border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); overflow: hidden;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
+  .container.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+
   header {
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: #fff; padding: 25px 20px; text-align: center;
@@ -187,6 +374,12 @@
   }
 
   @media (max-width: 480px) {
+    .splash-title { font-size: 1.35rem; }
+    .splash-subtitle { font-size: 0.9rem; }
+    .splash-message { font-size: 0.95rem; padding: 12px 18px; }
+    .logo-wrapper { width: 140px; height: 140px; }
+    .logo-circle { width: 80px; height: 80px; font-size: 2.2rem; }
+
     header { padding: 20px 15px; }
     header h1 { font-size: 1.1rem; }
     header p { font-size: 0.82rem; }
@@ -207,7 +400,35 @@
 </style>
 </head>
 <body>
-<div class="container">
+
+<!-- ============================================ -->
+<!-- شاشة الترحيب (Splash Screen) -->
+<!-- ============================================ -->
+<div class="splash-screen" id="splashScreen">
+  <div class="logo-wrapper">
+    <div class="rotating-ring"></div>
+    <div class="rotating-ring-2"></div>
+    <div class="rotating-ring-3"></div>
+    <div class="logo-circle">🎓</div>
+  </div>
+
+  <h1 class="splash-title">النظام التقني الذكي</h1>
+  <p class="splash-subtitle">للمبرمج بهاء الدين الحسين</p>
+
+  <div class="splash-message">
+    ✨ أهلاً وسهلاً بك ✨<br>
+    سعداء بانضمامك إلينا في جلسات أساسيات البرمجة
+  </div>
+
+  <div class="loading-bar">
+    <div class="loading-bar-fill"></div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- الحاوية الرئيسية - نموذج التسجيل -->
+<!-- ============================================ -->
+<div class="container" id="mainContainer">
   <header>
     <h1>🎓 النظام التقني الذكي</h1>
     <p>للمبرمج بهاء الدين الحسين</p>
@@ -311,15 +532,34 @@
 
 <script>
   // ============================================
-  // رابط Google Apps Script الخاص بك
+  // روابط النظام
   // ============================================
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwj2aPsOSYygXRbf-VIkeUuyg5hb8NRoQY-X7p0JwazYPOZX0FKZvrazBsRBK1NIMtAqQ/exec';
-
-  // ============================================
-  // رابط مجموعة الواتساب
-  // ============================================
   const WHATSAPP_URL = 'https://chat.whatsapp.com/KzEZrjKeen2GBgAqkUIanG';
 
+  // ============================================
+  // شاشة الترحيب - تختفي بعد 4 ثواني
+  // ============================================
+  const SPLASH_DURATION = 4000; // مدة ظهور شاشة الترحيب بالميلي ثانية
+
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      const splash = document.getElementById('splashScreen');
+      const main = document.getElementById('mainContainer');
+
+      splash.classList.add('hide');
+      main.classList.add('show');
+
+      // إزالة عنصر الترحيب من الصفحة بعد انتهاء الأنيميشن
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 800);
+    }, SPLASH_DURATION);
+  });
+
+  // ============================================
+  // إرسال النموذج
+  // ============================================
   document.getElementById('registrationForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -363,13 +603,12 @@
   });
 
   // ============================================
-  // عرض نافذة النجاح مع التحويل التلقائي للواتساب
+  // نافذة النجاح + الواتساب
   // ============================================
   function showSuccessModal() {
     const modal = document.getElementById('successModal');
     modal.classList.add('show');
 
-    // التحويل التلقائي للواتساب بعد ثانيتين
     setTimeout(() => {
       window.open(WHATSAPP_URL, '_blank');
     }, 2000);
