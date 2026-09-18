@@ -3,205 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>التسجيل في جلسات أساسيات البرمجة - النظام التقني الذكي للمبرمج بهاء الدين الحسين</title>
+<title>التسجيل - النظام التقني الذكي للمبرمج بهاء الدين الحسين</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
   body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh; padding: 15px;
     display: flex; align-items: center; justify-content: center;
-    overflow-x: hidden;
   }
-
-  /* ============================================ */
-  /* شاشة الترحيب */
-  /* ============================================ */
   .splash-screen {
-    position: fixed;
-    top: 0; left: 0;
+    position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #764ba2 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-    padding: 20px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 10000; transition: opacity 0.8s ease, visibility 0.8s ease; padding: 20px;
   }
-  .splash-screen.hide {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  /* الشعار الدائري مع الخطوط الملونة */
+  .splash-screen.hide { opacity: 0; visibility: hidden; }
   .logo-wrapper {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
+    position: relative; width: 160px; height: 160px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 30px;
   }
-
-  /* الحلقة الخارجية الدوّارة */
   .rotating-ring {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 4px solid transparent;
-    border-top-color: #00d4ff;
-    border-right-color: #ff006e;
-    border-bottom-color: #ffbe0b;
-    border-left-color: #06ffa5;
+    position: absolute; width: 100%; height: 100%;
+    border-radius: 50%; border: 4px solid transparent;
+    border-top-color: #00d4ff; border-right-color: #ff006e;
+    border-bottom-color: #ffbe0b; border-left-color: #06ffa5;
     animation: spin 2s linear infinite;
     box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
   }
-
-  /* الحلقة الثانية الدوّارة بالعكس */
   .rotating-ring-2 {
-    position: absolute;
-    width: 130%;
-    height: 130%;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #ff006e;
-    border-right-color: #06ffa5;
-    border-bottom-color: #00d4ff;
-    border-left-color: #ffbe0b;
-    animation: spin-reverse 3s linear infinite;
-    opacity: 0.7;
+    position: absolute; width: 130%; height: 130%;
+    border-radius: 50%; border: 3px solid transparent;
+    border-top-color: #ff006e; border-right-color: #06ffa5;
+    border-bottom-color: #00d4ff; border-left-color: #ffbe0b;
+    animation: spin-reverse 3s linear infinite; opacity: 0.7;
   }
-
-  /* الحلقة الثالثة */
   .rotating-ring-3 {
-    position: absolute;
-    width: 85%;
-    height: 85%;
-    border-radius: 50%;
-    border: 2px dashed rgba(255, 255, 255, 0.4);
+    position: absolute; width: 85%; height: 85%;
+    border-radius: 50%; border: 2px dashed rgba(255, 255, 255, 0.4);
     animation: spin 4s linear infinite;
   }
-
-  /* الشعار الدائري الصغير في المنتصف */
   .logo-circle {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+    width: 90px; height: 90px; border-radius: 50%;
     background: linear-gradient(135deg, #ffffff, #e0e7ff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     font-size: 2.5rem;
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6),
-                inset 0 0 20px rgba(42, 82, 152, 0.2);
-    z-index: 2;
-    animation: pulse-logo 2s ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), inset 0 0 20px rgba(42, 82, 152, 0.2);
+    z-index: 2; animation: pulse-logo 2s ease-in-out infinite;
   }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  @keyframes spin-reverse {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0deg); }
-  }
-  @keyframes pulse-logo {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-  }
-
-  /* اسم النظام */
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes spin-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+  @keyframes pulse-logo { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
   .splash-title {
-    color: #fff;
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
+    color: #fff; font-size: 1.8rem; font-weight: bold;
+    text-align: center; margin-bottom: 10px;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     animation: fadeInUp 1s ease 0.3s both;
   }
-
   .splash-subtitle {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.9); font-size: 1rem;
+    text-align: center; margin-bottom: 25px;
     animation: fadeInUp 1s ease 0.5s both;
   }
-
-  /* رسالة الترحيب */
   .splash-message {
-    color: #fff;
-    font-size: 1.1rem;
-    text-align: center;
-    padding: 15px 25px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
+    color: #fff; font-size: 1.1rem; text-align: center;
+    padding: 15px 25px; background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px; backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    max-width: 400px;
-    line-height: 1.6;
+    max-width: 400px; line-height: 1.6;
     animation: fadeInUp 1s ease 0.7s both;
   }
-
-  /* شريط التحميل */
   .loading-bar {
-    margin-top: 30px;
-    width: 200px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    overflow: hidden;
-    animation: fadeInUp 1s ease 0.9s both;
+    margin-top: 30px; width: 200px; height: 4px;
+    background: rgba(255, 255, 255, 0.2); border-radius: 4px;
+    overflow: hidden; animation: fadeInUp 1s ease 0.9s both;
   }
   .loading-bar-fill {
-    height: 100%;
-    width: 0%;
+    height: 100%; width: 0%;
     background: linear-gradient(90deg, #00d4ff, #06ffa5, #ffbe0b, #ff006e);
-    background-size: 200% 100%;
-    border-radius: 4px;
+    background-size: 200% 100%; border-radius: 4px;
     animation: loadingProgress 3s ease forwards, shimmer 2s linear infinite;
   }
-
-  @keyframes loadingProgress {
-    from { width: 0%; }
-    to { width: 100%; }
-  }
-  @keyframes shimmer {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 200% 0%; }
-  }
-
+  @keyframes loadingProgress { from { width: 0%; } to { width: 100%; } }
+  @keyframes shimmer { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
-  /* ============================================ */
-  /* الحاوية الرئيسية (تظهر بعد الترحيب) */
-  /* ============================================ */
   .container {
     width: 100%; max-width: 550px; background: #fff;
-    border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); overflow: hidden;
-    opacity: 0;
-    transform: scale(0.95);
+    border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    overflow: hidden; opacity: 0; transform: scale(0.95);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  .container.show {
-    opacity: 1;
-    transform: scale(1);
-  }
-
+  .container.show { opacity: 1; transform: scale(1); }
   header {
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: #fff; padding: 25px 20px; text-align: center;
@@ -214,11 +109,13 @@
     display: block; margin-bottom: 6px; color: #333;
     font-weight: 600; font-size: 0.95rem;
   }
+  .required-star { color: #ef4444; margin-right: 4px; }
   .form-group input,
   .form-group select,
   .form-group textarea {
     width: 100%; padding: 12px 14px; border: 2px solid #e0e7ff;
     border-radius: 8px; font-size: 1rem; transition: all 0.3s; background: #f8faff;
+    font-family: inherit;
   }
   .form-group input:focus,
   .form-group select:focus,
@@ -266,112 +163,56 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   .toast.error { background: #ef4444; }
-
-  /* ============================================ */
-  /* نافذة النجاح مع زر الواتساب */
-  /* ============================================ */
   .success-modal {
-    position: fixed;
-    top: 0; left: 0;
+    position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s, visibility 0.4s;
-    padding: 20px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999; opacity: 0; visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s; padding: 20px;
   }
-  .success-modal.show {
-    opacity: 1;
-    visibility: visible;
-  }
+  .success-modal.show { opacity: 1; visibility: visible; }
   .success-content {
-    background: #fff;
-    border-radius: 20px;
-    padding: 35px 25px;
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    background: #fff; border-radius: 20px;
+    padding: 35px 25px; max-width: 420px; width: 100%;
+    text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     transform: scale(0.7);
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .success-modal.show .success-content {
-    transform: scale(1);
-  }
+  .success-modal.show .success-content { transform: scale(1); }
   .success-icon {
-    width: 80px;
-    height: 80px;
+    width: 80px; height: 80px;
     background: linear-gradient(135deg, #10b981, #059669);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 2.5rem;
-    color: #fff;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px; font-size: 2.5rem; color: #fff;
     animation: pulse 1.5s ease-in-out infinite;
   }
   @keyframes pulse {
     0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
     50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
   }
-  .success-content h2 {
-    color: #2a5298;
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-  }
-  .success-content p {
-    color: #555;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    line-height: 1.6;
-  }
-  .success-content .note {
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 20px;
-  }
+  .success-content h2 { color: #2a5298; font-size: 1.5rem; margin-bottom: 12px; }
+  .success-content p { color: #555; font-size: 1rem; margin-bottom: 10px; line-height: 1.6; }
+  .success-content .note { font-size: 0.9rem; color: #888; margin-bottom: 20px; }
   .btn-whatsapp {
-    width: 100%;
-    padding: 15px;
+    width: 100%; padding: 15px;
     background: linear-gradient(135deg, #25D366, #128C7E);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 12px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    color: #fff; border: none; border-radius: 10px;
+    font-size: 1.05rem; font-weight: bold; cursor: pointer;
+    margin-bottom: 12px; transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
   }
   .btn-whatsapp:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
   }
   .btn-close {
-    width: 100%;
-    padding: 12px;
-    background: transparent;
-    color: #888;
-    border: 2px solid #e0e7ff;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    cursor: pointer;
+    width: 100%; padding: 12px; background: transparent;
+    color: #888; border: 2px solid #e0e7ff;
+    border-radius: 10px; font-size: 0.95rem; cursor: pointer;
     transition: all 0.2s;
   }
-  .btn-close:hover {
-    background: #f8faff;
-    color: #2a5298;
-    border-color: #2a5298;
-  }
+  .btn-close:hover { background: #f8faff; color: #2a5298; border-color: #2a5298; }
 
   @media (max-width: 480px) {
     .splash-title { font-size: 1.35rem; }
@@ -379,7 +220,6 @@
     .splash-message { font-size: 0.95rem; padding: 12px 18px; }
     .logo-wrapper { width: 140px; height: 140px; }
     .logo-circle { width: 80px; height: 80px; font-size: 2.2rem; }
-
     header { padding: 20px 15px; }
     header h1 { font-size: 1.1rem; }
     header p { font-size: 0.82rem; }
@@ -401,9 +241,6 @@
 </head>
 <body>
 
-<!-- ============================================ -->
-<!-- شاشة الترحيب (Splash Screen) -->
-<!-- ============================================ -->
 <div class="splash-screen" id="splashScreen">
   <div class="logo-wrapper">
     <div class="rotating-ring"></div>
@@ -411,155 +248,141 @@
     <div class="rotating-ring-3"></div>
     <div class="logo-circle">🎓</div>
   </div>
-
   <h1 class="splash-title">النظام التقني الذكي</h1>
   <p class="splash-subtitle">للمبرمج بهاء الدين الحسين</p>
-
   <div class="splash-message">
     ✨ أهلاً وسهلاً بك ✨<br>
     سعداء بانضمامك إلينا في جلسات أساسيات البرمجة
   </div>
-
   <div class="loading-bar">
     <div class="loading-bar-fill"></div>
   </div>
 </div>
 
-<!-- ============================================ -->
-<!-- الحاوية الرئيسية - نموذج التسجيل -->
-<!-- ============================================ -->
 <div class="container" id="mainContainer">
   <header>
     <h1>🎓 النظام التقني الذكي</h1>
     <p>للمبرمج بهاء الدين الحسين</p>
     <p style="margin-top:6px; font-size:0.85rem; opacity:0.85;">التسجيل في جلسات أساسيات البرمجة</p>
   </header>
-
   <form id="registrationForm">
-    <div class="form-group">
-      <label for="fullName">الاسم الكامل *</label>
-      <input type="text" id="fullName" required placeholder="اكتب اسمك الكامل">
+    <div id="fieldsContainer">
+      <div style="text-align:center; padding:20px; color:#2a5298;">⏳ جاري تحميل النموذج...</div>
     </div>
-
-    <div class="form-group">
-      <label>الجنس *</label>
-      <div class="radio-group">
-        <label>
-          <input type="radio" name="gender" value="ذكر" required>
-          👨 ذكر
-        </label>
-        <label>
-          <input type="radio" name="gender" value="أنثى" required>
-          👩 أنثى
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="email">البريد الإلكتروني (اختياري)</label>
-      <input type="email" id="email" placeholder="example@email.com">
-    </div>
-
-    <div class="form-group">
-      <label for="phone">رقم الهاتف *</label>
-      <input type="tel" id="phone" required placeholder="07xxxxxxxx">
-    </div>
-
-    <div class="form-group">
-      <label for="age">العمر *</label>
-      <input type="number" id="age" min="10" max="80" required placeholder="18">
-    </div>
-
-    <div class="form-group">
-      <label for="city">المدينة *</label>
-      <input type="text" id="city" required placeholder="مثال: دمشق">
-    </div>
-
-    <div class="form-group">
-      <label for="education">الشهادة التعليمية (اختياري)</label>
-      <select id="education">
-        <option value="">-- اختر الشهادة --</option>
-        <option value="ابتدائي">ابتدائي</option>
-        <option value="إعدادي">إعدادي</option>
-        <option value="ثانوي">ثانوي</option>
-        <option value="معهد">معهد</option>
-        <option value="جامعة">جامعة</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>هل لديك خبرة سابقة في البرمجة؟ *</label>
-      <div class="radio-group">
-        <label>
-          <input type="radio" name="experience" value="نعم" required>
-          ✅ نعم
-        </label>
-        <label>
-          <input type="radio" name="experience" value="لا" required>
-          ❌ لا
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>الجلسات المطلوبة *</label>
-      <input type="text" value="جلسات أساسيات البرمجة - النظام التقني الذكي للمبرمج بهاء الدين الحسين" disabled
-             style="background:#eef2ff; font-weight:600; color:#2a5298;">
-      <input type="hidden" id="course" value="جلسات أساسيات البرمجة - النظام التقني الذكي للمبرمج بهاء الدين الحسين">
-    </div>
-
     <button type="submit" class="btn-submit">✅ تأكيد التسجيل</button>
   </form>
 </div>
 
 <div id="toast" class="toast"></div>
 
-<!-- ============================================ -->
-<!-- نافذة النجاح مع زر الواتساب -->
-<!-- ============================================ -->
 <div id="successModal" class="success-modal">
   <div class="success-content">
     <div class="success-icon">✅</div>
     <h2>تم تسجيلك بنجاح!</h2>
     <p>سيتم تحويلك تلقائياً إلى مجموعة الواتساب خلال لحظات...</p>
     <p class="note">إذا لم يتم التحويل تلقائياً، اضغط الزر أدناه:</p>
-    <button class="btn-whatsapp" onclick="goToWhatsapp()">
-      💬 الانضمام إلى مجموعة الواتساب
-    </button>
+    <button class="btn-whatsapp" onclick="goToWhatsapp()">💬 الانضمام إلى مجموعة الواتساب</button>
     <button class="btn-close" onclick="closeModal()">إغلاق</button>
   </div>
 </div>
 
 <script>
-  // ============================================
-  // روابط النظام
-  // ============================================
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwj2aPsOSYygXRbf-VIkeUuyg5hb8NRoQY-X7p0JwazYPOZX0FKZvrazBsRBK1NIMtAqQ/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6rLGBj_5wqzOLPHTsPV4Fuynz-pXlJ1OD8ry3MJVsx7DCfqUma5YqboD54332EWt2pg/exec';
   const WHATSAPP_URL = 'https://chat.whatsapp.com/KzEZrjKeen2GBgAqkUIanG';
+  const SPLASH_DURATION = 4000;
 
-  // ============================================
-  // شاشة الترحيب - تختفي بعد 4 ثواني
-  // ============================================
-  const SPLASH_DURATION = 4000; // مدة ظهور شاشة الترحيب بالميلي ثانية
+  let formFields = [];
 
   window.addEventListener('load', function() {
+    loadFields();
     setTimeout(function() {
       const splash = document.getElementById('splashScreen');
       const main = document.getElementById('mainContainer');
-
       splash.classList.add('hide');
       main.classList.add('show');
-
-      // إزالة عنصر الترحيب من الصفحة بعد انتهاء الأنيميشن
-      setTimeout(() => {
-        splash.style.display = 'none';
-      }, 800);
+      setTimeout(() => { splash.style.display = 'none'; }, 800);
     }, SPLASH_DURATION);
   });
 
-  // ============================================
-  // إرسال النموذج
-  // ============================================
+  function loadFields() {
+    fetch(SCRIPT_URL + '?action=getFields')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data && data.data.length > 0) {
+          formFields = data.data;
+          renderForm();
+        } else {
+          formFields = getDefaultFields();
+          renderForm();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        formFields = getDefaultFields();
+        renderForm();
+      });
+  }
+
+  function getDefaultFields() {
+    return [
+      { id: 'fullName', label: 'الاسم الكامل', type: 'text', required: true, options: [], placeholder: 'اكتب اسمك الكامل' },
+      { id: 'gender', label: 'الجنس', type: 'radio', required: true, options: ['ذكر', 'أنثى'], placeholder: '' },
+      { id: 'email', label: 'البريد الإلكتروني', type: 'email', required: false, options: [], placeholder: 'example@email.com' },
+      { id: 'phone', label: 'رقم الهاتف', type: 'tel', required: true, options: [], placeholder: '07xxxxxxxx' },
+      { id: 'age', label: 'العمر', type: 'number', required: true, options: [], placeholder: '18' },
+      { id: 'city', label: 'المدينة', type: 'text', required: true, options: [], placeholder: 'مثال: دمشق' },
+      { id: 'education', label: 'الشهادة التعليمية', type: 'select', required: false, options: ['ابتدائي', 'إعدادي', 'ثانوي', 'معهد', 'جامعة'], placeholder: '' },
+      { id: 'experience', label: 'هل لديك خبرة سابقة في البرمجة؟', type: 'radio', required: true, options: ['نعم', 'لا'], placeholder: '' }
+    ];
+  }
+
+  function renderForm() {
+    const container = document.getElementById('fieldsContainer');
+    let html = '';
+
+    formFields.forEach(field => {
+      const requiredStar = field.required ? '<span class="required-star">*</span>' : '';
+      const requiredAttr = field.required ? 'required' : '';
+      const placeholder = escapeAttr(field.placeholder || '');
+
+      html += `<div class="form-group">`;
+      html += `<label for="field_${field.id}">${requiredStar}${escapeHtml(field.label)}</label>`;
+
+      if (field.type === 'radio') {
+        html += `<div class="radio-group">`;
+        field.options.forEach((opt) => {
+          html += `
+            <label>
+              <input type="radio" name="${field.id}" value="${escapeAttr(opt)}" ${requiredAttr}>
+              ${escapeHtml(opt)}
+            </label>
+          `;
+        });
+        html += `</div>`;
+      }
+      else if (field.type === 'select') {
+        html += `<select id="field_${field.id}" name="${field.id}" ${requiredAttr}>`;
+        html += `<option value="">-- اختر --</option>`;
+        field.options.forEach(opt => {
+          html += `<option value="${escapeAttr(opt)}">${escapeHtml(opt)}</option>`;
+        });
+        html += `</select>`;
+      }
+      else if (field.type === 'textarea') {
+        html += `<textarea id="field_${field.id}" name="${field.id}" rows="3" placeholder="${placeholder}" ${requiredAttr}></textarea>`;
+      }
+      else {
+        let extraAttrs = '';
+        if (field.type === 'number') extraAttrs = 'min="1" max="120"';
+        html += `<input type="${field.type}" id="field_${field.id}" name="${field.id}" placeholder="${placeholder}" ${requiredAttr} ${extraAttrs}>`;
+      }
+
+      html += `</div>`;
+    });
+
+    container.innerHTML = html;
+  }
+
   document.getElementById('registrationForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -568,19 +391,18 @@
     submitBtn.disabled = true;
     submitBtn.textContent = '⏳ جاري الإرسال...';
 
-    const genderInput = document.querySelector('input[name="gender"]:checked');
-    const experienceInput = document.querySelector('input[name="experience"]:checked');
-
     const formData = new URLSearchParams();
-    formData.append('fullName', document.getElementById('fullName').value.trim());
-    formData.append('gender', genderInput ? genderInput.value : '');
-    formData.append('email', document.getElementById('email').value.trim());
-    formData.append('phone', document.getElementById('phone').value.trim());
-    formData.append('age', document.getElementById('age').value);
-    formData.append('city', document.getElementById('city').value.trim());
-    formData.append('education', document.getElementById('education').value);
-    formData.append('experience', experienceInput ? experienceInput.value : '');
-    formData.append('course', document.getElementById('course').value);
+
+    formFields.forEach(field => {
+      if (field.type === 'radio') {
+        const checked = document.querySelector(`input[name="${field.id}"]:checked`);
+        formData.append(field.id, checked ? checked.value : '');
+      } else {
+        const el = document.getElementById('field_' + field.id);
+        formData.append(field.id, el ? el.value.trim() : '');
+      }
+    });
+
     formData.append('date', new Date().toLocaleString('ar-EG'));
 
     fetch(SCRIPT_URL, {
@@ -602,24 +424,22 @@
     });
   });
 
-  // ============================================
-  // نافذة النجاح + الواتساب
-  // ============================================
   function showSuccessModal() {
     const modal = document.getElementById('successModal');
     modal.classList.add('show');
-
-    setTimeout(() => {
-      window.open(WHATSAPP_URL, '_blank');
-    }, 2000);
+    setTimeout(() => { window.open(WHATSAPP_URL, '_blank'); }, 2000);
   }
+  function closeModal() { document.getElementById('successModal').classList.remove('show'); }
+  function goToWhatsapp() { window.open(WHATSAPP_URL, '_blank'); }
 
-  function closeModal() {
-    document.getElementById('successModal').classList.remove('show');
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   }
-
-  function goToWhatsapp() {
-    window.open(WHATSAPP_URL, '_blank');
+  function escapeAttr(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   }
 
   function showToast(msg, isError = false) {
